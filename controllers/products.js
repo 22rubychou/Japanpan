@@ -1,46 +1,46 @@
 import multer from 'multer'
-// import FTPStorage from 'multer-ftp'
+import FTPStorage from 'multer-ftp'
 import axios from 'axios'
 import path from 'path'
 import fs from 'fs'
 
 import products from '../models/products.js'
 
-// let storage
+let storage
 
-// if (process.env.DEV === 'true') {
-//   storage = multer.diskStorage({
-//     destination (req, file, callback) {
-//       callback(null, 'images/')
-//     },
-//     filename (req, file, callback) {
-//       callback(null, Date.now() + path.extname(file.originalname))
-//     }
-//   })
-// } else {
-//   storage = new FTPStorage({
-//     // FTP 登入設定
-//     ftp: {
-//       host: process.env.FTP_HOST,
-//       user: process.env.FTP_USER,
-//       password: process.env.FTP_PASSWORD,
-//       secure: false
-//     },
-//     // 上傳的路徑含檔名
-//     // 路徑為 FTP 的絕對路徑
-//     destination (req, file, options, callback) {
-//       callback(null, '/' + Date.now() + path.extname(file.originalname))
-//     }
-//   })
-// }
-const storage = multer.diskStorage({
-  destination (req, file, callback) {
-    callback(null, './images/')
-  },
-  filename (req, file, callback) {
-    callback(null, Date.now() + path.extname(file.originalname))
-  }
-})
+if (process.env.DEV === 'true') {
+  storage = multer.diskStorage({
+    destination (req, file, callback) {
+      callback(null, 'images/')
+    },
+    filename (req, file, callback) {
+      callback(null, Date.now() + path.extname(file.originalname))
+    }
+  })
+} else {
+  storage = new FTPStorage({
+    // FTP 登入設定
+    ftp: {
+      host: process.env.FTP_HOST,
+      user: process.env.FTP_USER,
+      password: process.env.FTP_PASSWORD,
+      secure: false
+    },
+    // 上傳的路徑含檔名
+    // 路徑為 FTP 的絕對路徑
+    destination (req, file, options, callback) {
+      callback(null, '/' + Date.now() + path.extname(file.originalname))
+    }
+  })
+}
+// const storage = multer.diskStorage({
+//   destination (req, file, callback) {
+//     callback(null, './images/')
+//   },
+//   filename (req, file, callback) {
+//     callback(null, Date.now() + path.extname(file.originalname))
+//   }
+// })
 
 const upload = multer({
   storage,
