@@ -72,3 +72,11 @@ export const logout = async (req, res) => {
     }
   })
 }
+
+export const heartbeat = async (req, res) => {
+  let isLogin = false
+  if (req.session.user !== undefined) {
+    isLogin = true
+  }
+  res.status(200).send(isLogin)
+}
