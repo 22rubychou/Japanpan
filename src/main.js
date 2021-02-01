@@ -23,6 +23,7 @@ import 'vue-loading-overlay/dist/vue-loading.css'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import VueCarousel from 'vue-carousel'
+import VueAnlytics from 'vue-analytics'
 import App from './App.vue'
 import router from './router'
 import store from './store'
@@ -43,6 +44,9 @@ Vue.use(VueI18n)
 Vue.component('Loading', Loading)
 Vue.use(VueSweetalert2)
 Vue.use(VueCarousel)
+Vue.use(VueAnlytics, {
+  id: process.env.VUE_APP_GA
+})
 
 const i18n = new VueI18n({
   locale: 'zhTW'
