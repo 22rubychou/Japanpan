@@ -142,21 +142,26 @@ export const getOneProduct = async (req, res) => {
 }
 
 export const getImage = async (req, res) => {
-  // 因為 sendFile 只用絕對路徑
-  // 所以需要 process.cwd() 取得目前 node 執行的資料夾
-  const path = process.cwd() + '/images/' + req.params.filename
-  // 檢查路徑是否存在
-  const exists = fs.existsSync(path)
+  if (process.env.DEV === 'true') {
+    const path = process.cwd() + '/images/' + req.params.file
+    const exists = fs.existsSync(path)
 
-  if (exists) {
-    res.status(200).sendFile(path)
+    if (exists) {
+      res.status(200).sendFile(path)
+    } else {
+      res.status(404).send({ success: false, message: '找不到圖片' })
+    }
   } else {
-    res.status(404).send({ success: false, message: '找不到檔案' })
+    axios({
+      method: 'GET',
+      url: 'http://' + process.env.FTP_HOST + '/' + process.env.FTP_USER + '/' + req.params.file,
+      responseType: 'stream'
+    }).then(ress => {
+      ress.data.pipe(res)
+    }).catch(error => {
+      res.status(error.response.status).send({ success: false, message: '取得圖片失敗' })
+    })
   }
-}
-
-export const editIMG = (req, res) => {
-
 }
 
 export const edit = async (req, res) => {
