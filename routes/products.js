@@ -1,11 +1,10 @@
 import express from 'express'
-import { create, edit, deletee, getProducts, getImage, editIMG, getOneProduct } from '../controllers/products.js'
+import { create, edit, deletee, getProducts, getImage, getOneProduct } from '../controllers/products.js'
 
 const router = express.Router()
 
 router.post('/', create)
 router.patch('/:id', edit)
-router.patch('/images/:filename', editIMG)
 router.delete('/:id', deletee)
 router.get('/', getProducts)
 router.get('/:id', getOneProduct)
