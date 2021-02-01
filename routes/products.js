@@ -8,7 +8,7 @@ router.patch('/:id', edit)
 router.delete('/:id', deletee)
 router.get('/', getProducts)
 router.get('/:id', getOneProduct)
-router.get('/images/:filename', getImage)
+router.get('/images/:file', getImage)
 // router.get('/user/:user', user)
 // router.get('/file/:file', file)
 
