@@ -6,29 +6,34 @@
         b-form-select(v-model='selected' :options='filteroptions')
       b-col(cols="9")
     b-row.firstcolborder
-      b-col.d-flex.justify-content-center(cols="2").
-        編輯
       b-col.d-flex.justify-content-center(cols="3").
         訂單編號
       b-col.d-flex.justify-content-center(cols="3").
         訂單日期
       b-col.d-flex.justify-content-center(cols="3").
         狀態
+      b-col.d-flex.justify-content-center(cols="2").
+        編輯
       b-col.d-flex.justify-content-center(cols="1").
         刪除
     b-row.colBorder(v-for='(order, index) in filterorders')
-      b-col.d-flex.justify-content-center(cols="2")
-        b-btn.editbtn(variant="success" @click="showModel(order)")
-          font-awesome-icon(:icon="['fas', 'edit']")
       b-col.d-flex.justify-content-center(cols="3").
         {{ order.identification }}
       b-col.d-flex.justify-content-center(cols="3").
         {{ order.date }}
       b-col.d-flex.justify-content-center(cols="3")
         span.sellColorNormal(:class='{\'sellColor\': order.orderStatus === "已付款"}') {{ order.orderStatus }}
+      b-col.d-flex.justify-content-center(cols="2")
+        b-btn.editbtn(variant="success" @click="showModel(order)")
+          font-awesome-icon(:icon="['fas', 'edit']")
       b-col.d-flex.justify-content-center(cols="1")
-        b-btn.delbtn.d-flex.justify-content-center(variant="danger" @click="delOrder(order, index)")
-          span x
+        b-btn.delbtn.d-flex.justify-content-center(variant="danger" @click="showDelOrder(order, index)")
+          font-awesome-icon(:icon="['fas', 'trash-alt']")
+    b-modal#confirmModel(size='sm' v-model="showConfirm" ref="my-modal" centered hide-header hide-footer)
+      p.text-center 確定要刪除此資料嗎?
+      #modal-footer.d-flex.justify-content-center.my-4
+          b-button.confirmBtn.mr-5(id="show-btn" variant='success' @click="delOderCon") 確認
+          b-button.cancelBtn(id="show-btn" variant='primary' @click="closeModel") 取消
     b-modal#modal(size='lg' v-model="show" ref="my-modal" title='訂單資料' hide-header hide-footer)
       form.w-75.mx-auto(@submit.prevent='submit')
         .title 訂單資料
@@ -93,12 +98,12 @@
 }
 .title {
   margin-bottom: 5%;
-  line-height: 2.5rem;
+  letter-spacing: .15rem;
+  line-height: 1rem;
   text-align: center;
   color: #785651;
   font-weight: 500;
-  font-size: 1.2rem;
-  letter-spacing: .15rem;
+  font-size: 1.1rem;
 }
 #status {
   width: 100px;
@@ -158,6 +163,11 @@
   justify-content: center;
   display: flex;
   flex-direction: column;
+}
+#confirmModel {
+  p {
+    color: #785651;
+  }
 }
 .editbtn,
 .delbtn {
@@ -295,6 +305,9 @@ export default {
     return {
       orders: [],
       show: false,
+      showConfirm: false,
+      tempdel: {},
+      tempdelIndex: 0,
       orderTemp: {},
       orderInfoTemp: {},
       orderCartTemps: [],
@@ -312,6 +325,11 @@ export default {
     }
   },
   methods: {
+    showDelOrder (order, index) {
+      this.showConfirm = true
+      this.tempdel = order
+      this.tempdelIndex = index
+    },
     showModel (order) {
       this.show = true
       this.orderTemp = order
@@ -321,6 +339,31 @@ export default {
     },
     closeModel () {
       this.show = false
+      this.showConfirm = false
+    },
+    delOderCon () {
+      this.axios.delete(process.env.VUE_APP_API + '/orders/' + this.tempdel._id)
+        .then(res => {
+          if (res.data.success) {
+            this.orders.splice(this.tempdelIndex, 1)
+            this.tempdel = {}
+            this.tempdelIndex = 0
+            this.showConfirm = false
+          } else {
+            this.$swal({
+              icon: 'error',
+              title: '錯誤',
+              text: res.data.message
+            })
+          }
+        })
+        .catch(err => {
+          this.$swal({
+            icon: 'error',
+            title: '錯誤',
+            text: err.response.data.message
+          })
+        })
     },
     delOrderPro (index) {
       this.orderCartTemps.splice(index, 1)

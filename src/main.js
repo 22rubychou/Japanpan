@@ -28,8 +28,10 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-import { faHeart, faTrashAlt, faShoppingCart, faCartPlus, faEdit, faSearchPlus } from '@fortawesome/free-solid-svg-icons'
-library.add(faHeart, faTrashAlt, faShoppingCart, faCartPlus, faEdit, faSearchPlus)
+import { faHeart as faRegularHeart } from '@fortawesome/free-regular-svg-icons'
+import { faFacebookSquare, faInstagram } from '@fortawesome/free-brands-svg-icons'
+import { faHeart as faSolideHeart, faTrashAlt, faShoppingCart, faCartPlus, faEdit, faSearchPlus } from '@fortawesome/free-solid-svg-icons'
+library.add(faRegularHeart, faSolideHeart, faTrashAlt, faShoppingCart, faCartPlus, faEdit, faSearchPlus, faFacebookSquare, faInstagram)
 
 axios.defaults.withCredentials = true
 

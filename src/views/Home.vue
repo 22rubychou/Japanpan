@@ -10,7 +10,12 @@
         img.logo(:src="'./Home/logo05.png'")
         img.sec01main(:src="'./Home/main02.png'")
     #section02
-      img.decImg.decImg01(:src="'./Home/bread04.png'")
+      #sec02Img
+        //- img.titleImg(:src="'./Home/aboutus.png'")
+        img.decImg.decImg01(:src="'./Home/bread04.png'")
+        img.decImg.decImg02(:src="'./Home/fox04.png'")
+        img.decImg.decImg04(:src="'./Home/bread08.png'")
+        img.decImg03(:src="'./Home/bread05.png'")
       //- img.decImg.decImg02(:src="'./Home/bread05.png'")
       //- b-row
       //-   b-col(cols="4")
@@ -30,9 +35,8 @@
           在溫度與濕度上嚴格的管控，穩定麵包品質<br>
           每日將新鮮出爐的麵包以外送的方式送到顧客手中<br>
           希望大家可以每天都吃到美味健康的麵包
-      img.decImg.decImg02(:src="'./Home/fox04.png'")
     #section03
-      .aboutus(data-aos="fade" data-aos-offset="100")
+      .aboutpro(data-aos="fade" data-aos-offset="100")
         span.title 美味麵包
       <b-carousel id="carousel-1" v-model="slide" :interval="4000" fade @sliding-start="onSlideStart" @sliding-end="onSlideEnd">
         b-carousel-slide.img(img-src="@/assets/images/carousel01.png")

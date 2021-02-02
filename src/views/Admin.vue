@@ -8,12 +8,14 @@
   #container
     b-sidebar#sidebar-1.d-flex.justify-content-center( shadow bg-variant="white")
       ul.nav.flex-column
+        li.nav-item.d-flex.justify-content-center.mb-4
+          img.logo(:src="'./Home/logo08.png'")
         li.nav-item.mb-1.title(style="color:#785651")
           p.text-center 管理列表
         li.nav-item
-          router-link.nav-link.cate.text-center.p-0.mt-2(to="/admin" @click="cate='所有商品'") 產品管理
+          router-link.nav-link.cate.text-center.p-0.mt-2(to="/admin") 產品管理
         li.nav-item
-          router-link.nav-link.cate.text-center.p-0.mt-2(to="/admin/orderManager" @click="cate='所有商品'") 訂單管理
+          router-link.nav-link.cate.text-center.p-0.mt-2(to="/admin/orderManager") 訂單管理
     #right
       router-view
 </template>
@@ -44,6 +46,10 @@
   .breadcrumb-item::before {
     color: #785651;
   }
+}
+.logo {
+  height: 5rem;
+  width: auto;
 }
 .title {
   margin-bottom: 5%;
@@ -101,8 +107,6 @@
   }
   &:hover {
     transform: translate(0, -50%);
-    &::after {
-    }
   }
 }
 .btn {

@@ -22,7 +22,6 @@ a {
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
 
 .decImg {
@@ -65,7 +64,7 @@ a {
 .sec01main {
   width: 100%;
   position: absolute;
-  top: -8%;
+  top: -10%;
   left: 0;
   object-fit: cover;
 }
@@ -79,6 +78,20 @@ a {
 // #section02 {
 //   background: #fce9d8;
 // }
+#section02 {
+  // background: wheat;
+  justify-content: center;
+  .text {
+    position: relative;
+    ::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: url("../assets/images/fox04.png");
+    }
+  }
+}
 #section02 .row {
   display: flex;
   justify-content: center;
@@ -91,12 +104,20 @@ a {
   height: 100%;
   padding: 0;
 }
+#sec02Img {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  top: 0;
+  left: 0;
+}
 
 .decImg01 {
   width: 20rem;
-  bottom: 15%;
-  right: 0%;
+  bottom: 19%;
+  right: 12%;
   transform: rotateY(180deg);
+  z-index: 2;
 }
 .homeImg {
   width: 100%;
@@ -118,6 +139,7 @@ a {
   line-height: 2.4rem;
   font-size: 1.1rem;
   letter-spacing: 0.1rem;
+  position: absolute;
   .title {
     font-size: 1.3rem;
     padding-bottom: 0.5rem;
@@ -167,11 +189,33 @@ a {
   transform: translateY(-50%);
 }
 .decImg02 {
-  bottom: 0;
-  left: 5%;
+  top: 25%;
+  left: 11%;
   width: 15rem;
-  transform: rotateY(180deg);
+  transform: rotateY(180deg) rotate(-20deg);
   z-index: 1;
+}
+.decImg03 {
+  position: absolute;
+  bottom: 42%;
+  right: 15%;
+  width: 8rem;
+  z-index: 1;
+}
+.decImg04 {
+  position: absolute;
+  bottom: 18%;
+  left: 23%;
+  height: 9.5rem;
+  z-index: 1;
+}
+.titleImg {
+  width: 50%;
+  opacity: 0.3;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 /*section03--------------------------------------------------------------------------------------------*/
 #section03 {
@@ -179,6 +223,7 @@ a {
   flex-direction: column;
   align-items: center;
   position: relative;
+  justify-content: center;
 }
 #sec03Img {
   height: 90vh;
@@ -189,28 +234,29 @@ a {
   }
 }
 .carousel {
+  width: 90%;
   background: transparent !important;
 }
-.decImg03 {
-  bottom: 0;
-  left: 5%;
-  width: 15rem;
-  z-index: 100;
-  position: absolute;
-  &::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 10rem;
-    height: 100px;
-    background: $mainColor01;
-  }
-}
+// .decImg03 {
+//   bottom: 0;
+//   left: 5%;
+//   width: 15rem;
+//   z-index: 100;
+//   position: absolute;
+//   &::after {
+//     content: "";
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     width: 10rem;
+//     height: 100px;
+//     background: $mainColor01;
+//   }
+// }
 #section03Tag {
   width: 40%;
   position: absolute;
-  top: 90%;
+  bottom: 10%;
   left: 60%;
   z-index: 2;
   opacity: 0.8;
@@ -218,7 +264,36 @@ a {
     content: "sssssss";
     color: #000;
     position: absolute;
-    width: auto;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 100px;
+    background: wheat;
+    z-index: 10;
+  }
+}
+.aboutpro {
+  width: 100%;
+  margin: 3rem auto;
+  text-align: center;
+  color: $textColor;
+  text-shadow: 0 0 8px #fce9d8;
+  line-height: 2.4rem;
+  font-size: 1.1rem;
+  letter-spacing: 0.1rem;
+  .title {
+    font-size: 1.3rem;
+    padding-bottom: 0.5rem;
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -10%;
+      left: 0;
+      transform: translateX(-10%);
+      width: 120%;
+      border-bottom: 0.2rem solid $mainColor02;
+    }
   }
 }
 /*section04*/

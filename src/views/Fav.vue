@@ -251,13 +251,13 @@
 }
 .title {
   margin-bottom: 5%;
-  line-height: 2.5rem;
+  letter-spacing: .15rem;
+  line-height: 1rem;
   text-align: center;
   color: #785651;
   font-weight: 500;
-  font-size: 1.2rem;
-  letter-spacing: .15rem;
-  }
+  font-size: 1.1rem;
+}
 @media (min-width: 768px) {
   .breadcrumb {
     background: transparent;

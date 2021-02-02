@@ -98,6 +98,7 @@
   height: 100%;
   margin: auto;
   display: flex;
+  justify-content: space-around;
   padding-bottom: 8%;
   padding-top: 3%;
   position: relative;
@@ -130,7 +131,7 @@
 }
 #right {
   width: 82%;
-  padding-left: 5%;
+  margin-right: 3rem;
 }
 .title {
   letter-spacing: .15rem;
@@ -141,7 +142,7 @@
 }
 .col {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
 }
 #colBig {
   margin-bottom: 18%;
@@ -149,6 +150,17 @@
   height: 15rem;
   background: #fff;
   position: relative;
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 1px;
+    box-shadow: 0px 0px 7px #c5c4a6,0px 0px 7px #c5c4a6;
+    z-index: -1;
+  }
 }
 #colBox {
   position: relative;
@@ -170,6 +182,19 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  position: relative;
+  background: #fff;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 1px;
+    box-shadow: 0px 0px 7px #c5c4a6,0px 0px 7px #c5c4a6;
+    z-index: -1;
+  }
 }
 .bigText {
   letter-spacing: 0.15rem;

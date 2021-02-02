@@ -57,28 +57,33 @@
         b-button.confirmBtn.mr-5(v-if="!this.iscreate" id="show-btn" variant='success' @click="edit") 確認
         b-button.cancelBtn(id="show-btn" variant='primary' @click="closeModel") 取消
     b-row.firstcolborder
-      b-col.d-flex.justify-content-center(cols="2").
-        編輯
       b-col.d-flex.justify-content-center(cols="6").
         商品資訊
       b-col.d-flex.justify-content-center(cols="3").
         狀態
+      b-col.d-flex.justify-content-center(cols="2").
+        編輯
       b-col.d-flex.justify-content-center(cols="1").
         刪除
     b-row.colBorder(v-for='(product, index) in filterproducts' :key='product._id')
-      b-col.d-flex.justify-content-center(cols="2")
-        b-btn.editbtn(variant="success"  @click="showModel(false, product)")
-          font-awesome-icon(:icon="['fas', 'edit']")
-      b-col(cols="3")
+      b-col.d-flex.justify-content-center(cols="3")
         img.img(:src='product.imageUrl')
       b-col.d-flex.flexColumn(cols="3")
         .proBig {{ product.name }}
         .proSmall NT$ {{ product.price }}
       b-col.d-flex.justify-content-center(cols="3")
         span.sellColorNormal(:class='{\'sellColor\': product.sell === "上架"}') {{ product.sell }}
+      b-col.d-flex.justify-content-center(cols="2")
+        b-btn.editbtn(variant="success"  @click="showModel(false, product)")
+          font-awesome-icon(:icon="['fas', 'edit']")
       b-col.d-flex.justify-content-center(cols="1")
         b-btn.delbtn(variant="danger" @click="delProduct(product, index)")
-          span x
+          font-awesome-icon(:icon="['fas', 'trash-alt']")
+    b-modal#confirmModel(size='sm' v-model="showConfirm" ref="my-modal" centered hide-header hide-footer)
+      p.text-center 確定要刪除此資料嗎?
+      #modal-footer.d-flex.justify-content-center.my-4
+          b-button.confirmBtn.mr-5(id="show-btn" variant='success' @click="delConfirm") 確認
+          b-button.cancelBtn(id="show-btn" variant='primary' @click="closedelModel") 取消
 </template>
 
 <style lang="scss" scoped>
@@ -86,11 +91,11 @@
 .title {
   margin-bottom: 5%;
   letter-spacing: .15rem;
-  line-height: 2.5rem;
+  line-height: 1rem;
   text-align: center;
   color: #785651;
   font-weight: 500;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 .modelTitle {
   margin: 3% 0;
@@ -299,8 +304,11 @@ export default {
     return {
       iscreate: false,
       show: false,
+      showConfirm: false,
+      tempdelpro: {},
       products: [],
       tempProduct: {},
+      tempIndex: 0,
       selected: null,
       categorySelect: '所有類別',
       sellSelect: '全部',
@@ -422,11 +430,17 @@ export default {
           })
         })
     },
-    delProduct (product, index) {
-      this.axios.delete(process.env.VUE_APP_API + '/products/' + product._id)
+    closedelModel () {
+      this.showConfirm = false
+    },
+    delConfirm () {
+      this.axios.delete(process.env.VUE_APP_API + '/products/' + this.tempdelpro._id)
         .then(res => {
           if (res.data.success) {
-            this.products.splice(index, 1)
+            this.products.splice(this.tempIndex, 1)
+            this.showConfirm = false
+            this.tempdelpro = {}
+            this.tempIndex = 0
           } else {
             this.$swal({
               icon: 'error',
@@ -442,6 +456,11 @@ export default {
             text: err.response.data.message
           })
         })
+    },
+    delProduct (product, index) {
+      this.tempdelpro = product
+      this.tempIndex = index
+      this.showConfirm = true
     },
     showModel (iscreate, product) {
       if (iscreate) {

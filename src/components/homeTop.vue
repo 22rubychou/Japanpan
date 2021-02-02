@@ -4,42 +4,76 @@
       b-navbar.navbar(toggleable='lg' type="dark" :class="{ 'navbar--hidden': !showNavbar, 'navBg': showNavbarBg }")
         .con
           b-navbar-brand.topLogo(to='/')
-            img(:src="'./Home/logo02.png'" :class="{ 'topLogohide': !showNavbarBg, 'topLogoShow': showNavbarBg }")
+            img(:src="'./Home/logo05.png'" :class="{ 'topLogohide': !showNavbarBg, 'topLogoShow': showNavbarBg }")
           b-navbar-toggle(target='nav-collapse')
           b-collapse#nav-collapse(is-nav)
-            b-navbar-nav.mr-auto(:class="{ 'textShadow': !showNavbarBg }")
-              b-nav-item.nav-item.mr-4
-                a(href='#section01' v-smooth-scroll) 首頁
-                  p.topSmall.text-center Home
-              b-nav-item.nav-item.mr-4
-                a(href='#section02' v-smooth-scroll='{ duration: 1000, offset: -50 }') 關於我們
+            //- b-navbar-nav.mr-auto.w-25.d-flex.justify-content-between(:class="{ 'textShadow': !showNavbarBg }")
+            //-   b-nav-item.nav-item
+            //-     a(href='#section01' v-smooth-scroll) 首頁
+            //-       p.topSmall.text-center Home
+            //-   b-nav-item.nav-item
+            //-     a(href='#section02' v-smooth-scroll='{ duration: 1000, offset: -50 }') 關於我們
+            //-       p.topSmall.text-center About Us
+            //-   b-nav-item.nav-item(to='/allProducts') 美味麵包
+            //-       p.topSmall.text-center Delicious
+            b-navbar-nav.d-flex.navbarTop(v-if="(user.id.length === 0) && (admin.id.length === 0)" :class="{ 'textShadow': !showNavbarBg }")
+              b-nav-item.nav-item
+                a(href='#section02' v-smooth-scroll='{ duration: 1000, offset: 0 }') 關於我們
                   p.topSmall.text-center About Us
-              b-nav-item.nav-item.mr-4(to='/allProducts') 美味麵包
+              b-nav-item.nav-item(to='/allProducts') 美味麵包
                   p.topSmall.text-center Delicious
-            b-navbar-nav.ml-auto(v-if="(user.id.length === 0) && (admin.id.length === 0)" :class="{ 'textShadow': !showNavbarBg }")
-              b-nav-item.nav-item.mr-4(to='/fav').text-center 收藏({{ favItemsLength }})
+              b-nav-item.nav-item(to='/fav').text-center 收藏
                 p.topSmall.text-center Fav
-              b-nav-item.nav-item.mr-4(to='/cart').text-center 購物車({{ cartItemsLength }})
+              b-nav-item.nav-item(to='/cart').text-center 購物車
                 p.topSmall.text-center Cart
               b-nav-item.nav-item.text-center(to='/regandlogin') 登入 / 註冊
                 p.topSmall.text-center Sing In / Sing Up
-            b-navbar-nav.ml-auto(v-if="(user.id.length !== 0) && (admin.id.length === 0)")
-              b-nav-item.nav-item.mr-4(to='/fav').text-center 收藏({{ favItemsLength }})
+            b-navbar-nav.d-flex.navbarTopuser(v-if="(user.id.length !== 0) && (admin.id.length === 0)" :class="{ 'textShadow': !showNavbarBg }")
+              b-nav-item.nav-item
+                a(href='#section02' v-smooth-scroll='{ duration: 1000, offset: -50 }') 關於我們
+                  p.topSmall.text-center About Us
+              b-nav-item.nav-item(to='/allProducts') 美味麵包
+                  p.topSmall.text-center Delicious
+              b-nav-item.nav-item(to='/fav').text-center 收藏
                 p.topSmall.text-center Fav
-              b-nav-item.nav-item.ml-sm-4.text-center.mr-4(to='/cart') 購物車
+              b-nav-item.nav-item.text-center(to='/cart') 購物車
                 p.topSmall.text-center Cart
-              b-nav-item.nav-item(to='/member').text-center.mr-4 會員專區
+              b-nav-item.nav-item(to='/member').text-center 會員專區
                 p.topSmall.text-center.text-center Member
-              b-nav-item.nav-item.ml-sm-4.text-center(@click="logout") 登出
+              b-nav-item.nav-item.text-center(@click="logout") 登出
                 p.topSmall.text-center Log Out
-            b-navbar-nav.ml-auto(v-if="(admin.id.length !== 0) && (user.id.length === 0)")
+            b-navbar-nav.d-flex.navbarTopadmin(v-if="(user.id.length === 0) && (admin.id.length !== 0)" :class="{ 'textShadow': !showNavbarBg }")
+              b-nav-item.nav-item
+                a(href='#section02' v-smooth-scroll='{ duration: 1000, offset: -50 }') 關於我們
+                  p.topSmall.text-center About Us
+              b-nav-item.nav-item(to='/allProducts') 美味麵包
+                  p.topSmall.text-center Delicious
               b-nav-item.nav-item.text-center(to='/admin') 管理者頁面
                 p.topSmall.text-center.text-center Admin
-              b-nav-item.nav-item.ml-sm-4.text-center(@click="adminLogout") 登出
+              b-nav-item.nav-item.text-center(@click="adminLogout") 登出
                 p.topSmall.text-center Log Out
 </template>
 
 <style lang="scss" scoped>
+#nav-collapse {
+  display: flex;
+  justify-content: center;
+}
+.navbarTop {
+  justify-content: space-between;
+  margin-left: auto;
+  width: 50%;
+}
+.navbarTopadmin {
+  justify-content: space-between;
+  margin-left: auto;
+  width: 40%;
+}
+.navbarTopuser {
+  justify-content: space-between;
+  margin-left: auto;
+  width: 50%;
+}
 .navbar.navbar--hidden {
   box-shadow: none;
   transform: translate3d(0, -100%, 0);
@@ -48,12 +82,17 @@
   background: #c5c4a6 !important;
 }
 .topLogohide {
+  display: none;
   opacity: 0;
   transition: 1s;
 }
 .topLogoShow {
+  display: block;
   opacity: 1;
   transition: 1s;
+}
+.w-25 {
+  width: 40%;
 }
 #top {
   width: 100%;
@@ -63,9 +102,10 @@
     color: white;
     font-weight: 500;
     letter-spacing: .03rem;
-    background: transparent;
+    background: #c5c4a6ab;
+    // background: transparent;
     position: absolute;
-    height: 15%;
+    height: 7.5rem;
     width: 100%;
     position: fixed;
     display: flex;
@@ -74,6 +114,8 @@
     text-shadow: none;
     transition: .8s;
     .con {
+      display: flex;
+      align-items: center;
       width: 90%;
       margin: 0;
       a {
@@ -85,6 +127,9 @@
 .textShadow {
   text-shadow: 0 0 3px #785651;
   transition: .8s;
+  justify-content: space-between;
+  width: 60%;
+  margin: auto;
 }
 
 .navbar-nav {
@@ -92,7 +137,7 @@
 }
 
 .nav-item a {
-  font-size: 1.1rem;
+  font-size: 1rem;
   text-shadow: 1px 1px 5xp #333;
   :hover {
     text-decoration: none;
@@ -104,16 +149,48 @@
   font-weight: lighter;
   margin: 0;
 }
+// .nav-item {
+//   margin: 0 1.2rem 0 4rem;
+//   padding: 0;
+//   position: relative;
+//   transition: .5s;
+//   &:hover {
+//     color: #785651;
+//     &::after {
+//       color: #785651;
+//     }
+//     &::before {
+//       color: #785651;
+//     }
+//   }
+//   &::after {
+//     content: '';
+//     position: absolute;
+//     top: 50%;
+//     left: -1.2rem;
+//     width: .7rem;
+//     height: 1px;
+//     transition: .8s;
+//     border-top: 2px solid #fff;
+//   }
+//   &::before {
+//     content: '';
+//     position: absolute;
+//     top: 50%;
+//     right: -1.2rem;
+//     width: .7rem;
+//     height: 1px;
+//     transition: .8s;
+//     border-top: 2px solid #fff;
+//   }
+// }
 
 .topLogo {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
   opacity: 1;
   transition: 2s;
-  width: 10rem;
+  height: 5rem;
   img {
-    width: 100%;
+    height: 100%;
     object-fit: contain;
   }
 }
@@ -130,7 +207,7 @@
   }
   .nav-item a {
     text-decoration: none;
-    text-align: left;
+    text-align: center;
   }
   #totop {
     width: 10px;
