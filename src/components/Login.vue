@@ -31,6 +31,8 @@
                 :state="passwordState"
               )
         b-col.mt-4(cols="12")
+          b-form-checkbox#checkbox-1(v-model='status' name='checkbox-1' value='admin' unchecked-value='user').
+            管理者登入
           b-btn.loginBtn(variant="success" type="submit" @click="onSubmit") 登入
         b-col.mt-1(cols="12")
           .smallText.text-center 帳號與密碼長度為 4 ~ 20 個字
@@ -106,7 +108,8 @@ export default {
   data () {
     return {
       account: '',
-      password: ''
+      password: '',
+      status: 'user'
     }
   },
   computed: {
@@ -138,61 +141,65 @@ export default {
           title: '帳號或密碼格式錯誤'
         })
       }
-      if (this.accountState && this.passwordState) {
-        this.axios.post(process.env.VUE_APP_API + '/admins/login', this.$data)
-          .then(res => {
-            if (res.data.success) {
-              this.$store.commit('adminLogin', res.data.result)
-              this.$swal({
-                icon: 'success',
-                title: '登入成功'
-              }).then(() => {
-                // sweet alert 對話框關掉後才跳到相簿頁
-                this.$router.push('/')
-              })
-            } else {
+      if (this.status === 'admin') {
+        if (this.accountState && this.passwordState) {
+          this.axios.post(process.env.VUE_APP_API + '/admins/login', this.$data)
+            .then(res => {
+              if (res.data.success) {
+                this.$store.commit('adminLogin', res.data.result)
+                this.$swal({
+                  icon: 'success',
+                  title: '登入成功'
+                }).then(() => {
+                  // sweet alert 對話框關掉後才跳到相簿頁
+                  this.$router.push('/')
+                })
+              } else {
+                this.$swal({
+                  icon: 'error',
+                  title: '發生錯誤',
+                  text: res.data.message
+                })
+              }
+            })
+            .catch(err => {
               this.$swal({
                 icon: 'error',
                 title: '發生錯誤',
-                text: res.data.message
+                text: err.response.data.message
               })
-            }
-          })
-          .catch(err => {
-            this.$swal({
-              icon: 'error',
-              title: '發生錯誤',
-              text: err.response.data.message
             })
-          })
+        }
       }
-      if (this.accountState && this.passwordState) {
-        this.axios.post(process.env.VUE_APP_API + '/users/login', this.$data)
-          .then(res => {
-            if (res.data.success) {
-              this.$store.commit('login', res.data.result)
-              this.$swal({
-                icon: 'success',
-                title: '登入成功'
-              }).then(() => {
-                // sweet alert 對話框關掉後才跳到相簿頁
-                this.$router.push('/')
-              })
-            } else {
+      if (this.status === 'user') {
+        if (this.accountState && this.passwordState) {
+          this.axios.post(process.env.VUE_APP_API + '/users/login', this.$data)
+            .then(res => {
+              if (res.data.success) {
+                this.$store.commit('login', res.data.result)
+                this.$swal({
+                  icon: 'success',
+                  title: '登入成功'
+                }).then(() => {
+                  // sweet alert 對話框關掉後才跳到相簿頁
+                  this.$router.push('/')
+                })
+              } else {
+                this.$swal({
+                  icon: 'error',
+                  title: '發生錯誤',
+                  text: res.data.message
+                })
+              }
+            })
+            .catch(err => {
               this.$swal({
                 icon: 'error',
                 title: '發生錯誤',
-                text: res.data.message
+                text: err.response.data.message
               })
-            }
-          })
-          .catch(err => {
-            this.$swal({
-              icon: 'error',
-              title: '發生錯誤',
-              text: err.response.data.message
             })
-          })
+        }
       }
     },
     onReset () {
