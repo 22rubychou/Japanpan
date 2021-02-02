@@ -62,8 +62,8 @@
             p.p-o.m-0 等待收取商品
           #stepImg
             img(:src="'./Home/fox04.png'")
-    .mapbox.mt-5
-      Map.map
+    //- .mapbox.mt-5
+    //-   Map.map
     #footer.d-flex.flex-column.justify-content-center
       b-row.w-100
         b-col(cols="3")
