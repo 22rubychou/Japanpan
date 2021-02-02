@@ -4,7 +4,7 @@
       b-navbar.navbar(toggleable='lg' type="dark" :class="{ 'navbar--hidden': !showNavbar, 'navBg': showNavbarBg }")
         .con
           b-navbar-brand.topLogo(to='/')
-            img(:src="'./Home/logo05.png'" :class="{ 'topLogohide': !showNavbarBg, 'topLogoShow': showNavbarBg }")
+            img(:src="'./Home/logo05.png'" href='#section01' v-smooth-scroll='{ duration: 1000, offset: 0 }' :class="{ 'topLogohide': !showNavbarBg, 'topLogoShow': showNavbarBg }")
           b-navbar-toggle(target='nav-collapse')
           b-collapse#nav-collapse(is-nav)
             //- b-navbar-nav.mr-auto.w-25.d-flex.justify-content-between(:class="{ 'textShadow': !showNavbarBg }")
@@ -189,6 +189,7 @@
   opacity: 1;
   transition: 2s;
   height: 5rem;
+  cursor: pointer;
   img {
     height: 100%;
     object-fit: contain;

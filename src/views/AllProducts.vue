@@ -98,7 +98,6 @@
   height: 100%;
   margin: auto;
   display: flex;
-  justify-content: space-around;
   padding-bottom: 8%;
   padding-top: 3%;
   position: relative;
@@ -131,7 +130,7 @@
 }
 #right {
   width: 82%;
-  margin-right: 3rem;
+  padding-left: 5%;
 }
 .title {
   letter-spacing: .15rem;
@@ -142,7 +141,7 @@
 }
 .col {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
 }
 #colBig {
   margin-bottom: 18%;

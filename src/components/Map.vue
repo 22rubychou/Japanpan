@@ -21,8 +21,9 @@
           <img class="img" src='../assets/fox_top.png'>
         </l-icon>
           <l-tooltip :options="{ permanent: true, interactive: true }">
-          <div style="color:#967f7a">
-            呷胖胖在這裡
+          <div style="color:#967f7a;font-size:1rem;text-align:center;font-weight: 400;">
+            呷胖胖位置<br>
+            台北市中正區忠孝西路1段49號
           </div>
         </l-tooltip>
       </l-marker>
@@ -31,6 +32,7 @@
 </template>
 
 <style lang="scss" scoped>
+@import "../assets/scss/all.scss";
 .img {
   width: 5rem;
   position: absolute;
