@@ -1,1 +1,1 @@
-(Japanpan)[ https://22rubychou.github.io/Japanpan/]
+(https://22rubychou.github.io/Japanpan/)[Japanpan]
