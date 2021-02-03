@@ -37,7 +37,7 @@
         span.title 網路購買流程
         //- p.text.mb-3(data-aos="fade" data-aos-offset="100").
         //-   使用呷胖胖網路購物功能，麵包簡單輕鬆購
-      b-row#step.w-75.mx-auto
+      b-row#step.w-100.mx-auto
         b-col.d-flex.justify-content-center.align-items-center.flex-column(cols="4")
           .d-flex.justify-content-center.align-items-center
             img.step1(:src="'./Home/circle.png'")
@@ -45,7 +45,7 @@
           #stepDes
             p.p-0.m-0 選擇要購買的麵包
           #stepImg
-            img(:src="'./Home/fox04.png'")
+            img(:src="'./Home/step01.png'")
         b-col.d-flex.justify-content-center.align-items-center.flex-column(cols="4")
           .d-flex.justify-content-center.align-items-center
             img.step2(:src="'./Home/circle.png'")
@@ -53,7 +53,7 @@
           #stepDes
             p.p-o.m-0 確認商品並寫資訊
           #stepImg
-            img(:src="'./Home/fox04.png'")
+            img(:src="'./Home/step02.png'")
         b-col.d-flex.justify-content-center.align-items-center.flex-column(cols="4")
           .d-flex.justify-content-center.align-items-center
             img.step3(:src="'./Home/circle.png'")
@@ -61,7 +61,7 @@
           #stepDes
             p.p-o.m-0 等待收取商品
           #stepImg
-            img(:src="'./Home/fox04.png'")
+            img(:src="'./Home/step03.png'")
     //- .mapbox.mt-5
     //-   Map.map
     #footer.d-flex.flex-column.justify-content-center

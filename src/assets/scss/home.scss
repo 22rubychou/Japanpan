@@ -23,7 +23,7 @@ a {
 }
 #section04 {
   width: 75%;
-  height: 60vh;
+  height: 90vh;
   margin: auto;
   position: relative;
   display: flex;
@@ -259,8 +259,8 @@ a {
 .tagtext {
   width: 30%;
   position: absolute;
-  bottom: 60%;
-  transform: translateY(50%);
+  top: 50%;
+  transform: translateY(-50%);
   left: 15%;
   z-index: 2;
   color: #fff;
