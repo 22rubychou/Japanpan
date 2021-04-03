@@ -1,6 +1,15 @@
 ### [Japanpan麵包電商官網DEMO](https://22rubychou.github.io/Japanpan/)
 ### 使用技術
 
+<ul>
+  <li>Vue CLI 開發、Vuex 存購物車資料、VueRouter 做頁面切換 </li>
+  <li>Axios串接資料庫</li>
+  <li>Node.js</li>
+  <li>BootstrapVue</li>
+</ul>
+
+### 功能說明
+
 #### 前台功能
 <ul>
   <li>商品瀏覽</li>
