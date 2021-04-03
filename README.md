@@ -1,4 +1,26 @@
 ### [Japanpan麵包電商官網DEMO](https://22rubychou.github.io/Japanpan/)
+### 使用技術
+
+#### 前台功能
+<ul>
+  <li>商品瀏覽</li>
+  <li>收藏商品</li>
+  <li>將商品加入購物車</li>
+  <li>註冊/登入會員</li>
+</ul>
+
+#### 會員後台功能
+<ul>
+  <li>瀏覽訂單資訊</li>
+</ul>
+
+#### 管理員後台功能
+<ul>
+  <li>瀏覽/更改訂單資訊</li>
+  <li>新增/更改/編輯/刪除商品</li>
+</ul>
+
+### 頁面截圖
 
 #### 首頁
 ![japanpan-02](https://user-images.githubusercontent.com/70134566/113467195-02431500-9474-11eb-9a93-e5e4cb3dd45e.png)
