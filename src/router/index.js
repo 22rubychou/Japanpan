@@ -143,15 +143,15 @@ router.beforeEach((to, from, next) => {
   }
 })
 
-//router.afterEach((to, from) => {
-  //let title = ''
-  //if (to.name === 'Album') {
-    //title = store.state.user.name + '的相簿'
-  //} else {
-    //title = to.meta.title
-  //}
+router.afterEach((to, from) => {
+  let title = ''
+  if (to.name === 'Album') {
+    title = store.state.user.name + '的相簿'
+  } else {
+    title = to.meta.title
+  }
 
-  //document.title = title
-//})
+  document.title = title
+})
 
 export default router
